@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/deepseek/:path*",
+      "destination": "/api/deepseek"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

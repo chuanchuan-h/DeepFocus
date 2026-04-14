@@ -23,6 +23,13 @@ DeepFocus 是一款专为学生和职场人士设计的考研/办公级生产力
 - 接口地址: `https://api.deepseek.com/v1/chat/completions`
 - 用途: 智能任务拆分、学习计划生成。
 
+## 部署说明 (Vercel)
+由于本项目包含 AI 代理后端，推荐部署至 **Vercel**：
+1. 将代码推送至 GitHub 仓库。
+2. 在 Vercel 中导入该仓库。
+3. 在 Vercel 项目设置的 **Environment Variables** 中添加 `DEEPSEEK_API_KEY`。
+4. Vercel 会自动识别 `vercel.json` 和 `api/` 目录，处理路由和 AI 代理。
+
 ## 快速开始
 1. 安装依赖: `npm install`
 2. 配置 API Key: 在 `.env` 文件中添加 `DEEPSEEK_API_KEY=你的密钥`
