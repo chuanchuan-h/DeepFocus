@@ -45,7 +45,8 @@ export const Kanban: React.FC = () => {
       const data = await response.json();
       
       if (!response.ok) {
-        throw new Error(data.error || 'AI 拆分失败');
+        const errorMsg = typeof data.error === 'object' ? (data.error.message || JSON.stringify(data.error)) : (data.error || 'AI 拆分失败');
+        throw new Error(errorMsg);
       }
 
       const content = data.choices[0].message.content;
