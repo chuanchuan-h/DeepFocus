@@ -23,12 +23,13 @@ DeepFocus 是一款专为学生和职场人士设计的考研/办公级生产力
 - 接口地址: `https://api.deepseek.com/v1/chat/completions`
 - 用途: 智能任务拆分、学习计划生成。
 
-## 部署说明 (Vercel)
-由于本项目包含 AI 代理后端，推荐部署至 **Vercel**：
-1. 将代码推送至 GitHub 仓库。
-2. 在 Vercel 中导入该仓库。
-3. 在 Vercel 项目设置的 **Environment Variables** 中添加 `DEEPSEEK_API_KEY`。
-4. Vercel 会自动识别 `vercel.json` 和 `api/` 目录，处理路由和 AI 代理。
+## 部署说明 (腾讯云 EdgeOne Pages)
+本项目已针对 **腾讯云 EdgeOne Pages** 进行优化，AI 代理通过边缘函数运行：
+1. 将代码推送至您的代码仓库（GitHub/GitLab/Gitee）。
+2. 在腾讯云 EdgeOne 控制台进入 **站点加速** -> **边缘函数** 或 **Pages**。
+3. 关联您的仓库并创建项目。
+4. **关键配置**：在项目设置的 **环境变量** 中添加 `DEEPSEEK_API_KEY`，值为您的 DeepSeek API 密钥。
+5. EdgeOne 访问时会自动识别 `/functions` 目录下的边缘函数处理 `/api/deepseek` 请求。
 
 ## 快速开始
 1. 安装依赖: `npm install`

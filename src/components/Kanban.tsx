@@ -32,7 +32,7 @@ export const Kanban: React.FC = () => {
     try {
       const prompt = `你是一位考研规划专家。请将以下学习目标拆分为3-5个具体的子任务，每个子任务给出预估的专注分钟数。输出格式必须为纯JSON数组，例如：[{"name":"观看视频课","minutes":45},{"name":"做课后习题","minutes":60}]。学习目标：${newTaskName}`;
       
-      const response = await fetch('/api/deepseek/v1/chat/completions', {
+      const response = await fetch('/api/deepseek', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -42,7 +42,17 @@ export const Kanban: React.FC = () => {
         })
       });
       
-      const data = await response.json();
+      const responseText = await response.text();
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch (e) {
+        console.error('Failed to parse JSON response:', responseText);
+        if (responseText.trim().startsWith('<')) {
+          throw new Error('服务器返回了错误页面 (HTML/XML)。请检查 EdgeOne Pages 的 API 路由配置 (检查 functions/api/deepseek.ts 是否部署成功)。');
+        }
+        throw new Error('接口返回格式不正确 (非 JSON)。');
+      }
       
       if (!response.ok) {
         const errorMsg = typeof data.error === 'object' ? (data.error.message || JSON.stringify(data.error)) : (data.error || 'AI 拆分失败');
